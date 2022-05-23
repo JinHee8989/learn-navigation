@@ -11,8 +11,9 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import HomeScreen from './screens/HomeScreen';
-// import DetailScreen from './screens/DetailScreen';
+import DetailScreen from './screens/DetailScreen';
 // import HeaderlessScreen from './screens/HeaderlessScreen';
+import MainScreen from './screens/MainScreen';
 import {View, Text, TouchableOpacity, Button} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -137,69 +138,88 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // }
 
 //3.하단 탭 네비게이터
-const Tab = createBottomTabNavigator();
-function HomeScreen() {
-  return <Text>Home</Text>;
-}
-function SearchScreen() {
-  return <Text>Search</Text>;
-}
-function NotificationScreen() {
-  return <Text>Notification</Text>;
-}
-function MessageScreen() {
-  return <Text>Message</Text>;
-}
+// const Tab = createBottomTabNavigator();
+// function HomeScreen() {
+//   return <Text>Home</Text>;
+// }
+// function SearchScreen() {
+//   return <Text>Search</Text>;
+// }
+// function NotificationScreen() {
+//   return <Text>Notification</Text>;
+// }
+// function MessageScreen() {
+//   return <Text>Message</Text>;
+// }
 
+// function App() {
+//   return (
+//     <NavigationContainer>
+//       <Tab.Navigator
+//         initalRouteName="Home"
+//         tabBarOptions={{activeTintColor: '#fdd835', showLabel: false}}>
+//         <Tab.Screen
+//           name="Home"
+//           component={HomeScreen}
+//           options={{
+//             title: '홈',
+//             tabBarIcon: ({color, size}) => (
+//               <Icon name="home" color={color} size={size} />
+//             ),
+//           }}
+//         />
+//         <Tab.Screen
+//           name="Search"
+//           component={SearchScreen}
+//           options={{
+//             title: '검색',
+//             tabBarIcon: ({color, size}) => (
+//               <Icon name="search" color={color} size={size} />
+//             ),
+//           }}
+//         />
+//         <Tab.Screen
+//           name="Notification"
+//           component={NotificationScreen}
+//           options={{
+//             title: '알림',
+//             tabBarIcon: ({color, size}) => (
+//               <Icon name="notifications" color={color} size={size} />
+//             ),
+//           }}
+//         />
+//         <Tab.Screen
+//           name="Message"
+//           component={MessageScreen}
+//           options={{
+//             title: '메시지',
+//             tabBarIcon: ({color, size}) => (
+//               <Icon name="message" color={color} size={size} />
+//             ),
+//           }}
+//         />
+//       </Tab.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+//4.네이티브 스택 네이게이터 + 하단 탭 네비게이터 사용 (MainScreen.js 이용)
+const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initalRouteName="Home"
-        tabBarOptions={{activeTintColor: '#fdd835', showLabel: false}}>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            title: '홈',
-            tabBarIcon: ({color, size}) => (
-              <Icon name="home" color={color} size={size} />
-            ),
-          }}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          component={MainScreen}
+          // options={{headerShown: false}}
         />
-        <Tab.Screen
-          name="Search"
-          component={SearchScreen}
-          options={{
-            title: '검색',
-            tabBarIcon: ({color, size}) => (
-              <Icon name="search" color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Notification"
-          component={NotificationScreen}
-          options={{
-            title: '알림',
-            tabBarIcon: ({color, size}) => (
-              <Icon name="notifications" color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Message"
-          component={MessageScreen}
-          options={{
-            title: '메시지',
-            tabBarIcon: ({color, size}) => (
-              <Icon name="message" color={color} size={size} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+        <Stack.Screen name="Detail" component={DetailScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+//5. 머티리얼 상단 탭 네비게이터
 
 export default App;
