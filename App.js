@@ -8,7 +8,10 @@
 
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  getFocusedRouteNameFromRoute,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
@@ -205,6 +208,18 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 //4.네이티브 스택 네이게이터 + 하단 탭 네비게이터 사용 (MainScreen.js 이용)
 const Stack = createNativeStackNavigator();
+
+function getHeaderTitle(route) {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+  const nameMap = {
+    Home: '홈',
+    Search: '검색',
+    Notification: '알릶',
+    Message: '메시지',
+  };
+
+  return nameMap[routeName];
+}
 function App() {
   return (
     <NavigationContainer>
@@ -212,7 +227,7 @@ function App() {
         <Stack.Screen
           name="Main"
           component={MainScreen}
-          // options={{headerShown: false}}
+          options={({route}) => ({title: getHeaderTitle(route)})}
         />
         <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
